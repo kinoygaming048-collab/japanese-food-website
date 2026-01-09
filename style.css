@@ -1,0 +1,28 @@
+body {
+  margin: 0;
+  font-family: Arial, sans-serif;
+}
+
+.hero {
+  background: #b91c1c;
+  color: white;
+  text-align: center;
+  padding: 80px 20px;
+}
+
+.btn {
+  background: black;
+  color: white;
+  padding: 12px 20px;
+  text-decoration: none;
+  border-radius: 5px;
+}
+
+section {
+  padding: 40px 20px;
+}
+
+.menu-list {
+  display: flex;
+  gap: 20px;
+}
