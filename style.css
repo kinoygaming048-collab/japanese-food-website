@@ -147,3 +147,20 @@ footer {
   margin-bottom: 20px;
 }
 
+.qty {
+  margin-top: 6px;
+}
+
+.qty button {
+  background: #b91c1c;
+  color: white;
+  border: none;
+  padding: 4px 10px;
+  border-radius: 6px;
+  cursor: pointer;
+}
+
+.qty span {
+  margin: 0 10px;
+  font-weight: bold;
+}

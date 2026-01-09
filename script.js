@@ -1,50 +1,90 @@
 let cart = [];
 let total = 0;
 
-function addToCart(name, price) {
-  cart.push({ name, price });
-  total += price;
+// format rupiah
+function formatRupiah(angka) {
+  return "Rp " + angka.toLocaleString("id-ID");
+}
+
+// tambah ke cart
+function addToCart(nama, harga) {
+  const item = cart.find(i => i.nama === nama);
+
+  if (item) {
+    item.qty++;
+  } else {
+    cart.push({ nama, harga, qty: 1 });
+  }
+
   renderCart();
 }
 
+// render cart
 function renderCart() {
-  const list = document.getElementById("cart-list");
+  const cartList = document.getElementById("cart-list");
   const totalEl = document.getElementById("total");
 
-  list.innerHTML = "";
+  cartList.innerHTML = "";
+  total = 0;
 
-  cart.forEach(item => {
+  cart.forEach((item, index) => {
+    const subTotal = item.harga * item.qty;
+    total += subTotal;
+
     const li = document.createElement("li");
-    li.textContent = `• ${item.name} - Rp ${item.price.toLocaleString("id-ID")}`;
-    list.appendChild(li);
+    li.innerHTML = `
+      <strong>${item.nama}</strong><br>
+      ${formatRupiah(item.harga)} × ${item.qty} = ${formatRupiah(subTotal)}
+      <div class="qty">
+        <button onclick="changeQty(${index}, -1)">−</button>
+        <span>${item.qty}</span>
+        <button onclick="changeQty(${index}, 1)">+</button>
+      </div>
+    `;
+    cartList.appendChild(li);
   });
 
-  totalEl.textContent = `Rp ${total.toLocaleString("id-ID")}`;
+  totalEl.textContent = formatRupiah(total);
 }
 
+// ubah qty
+function changeQty(index, delta) {
+  cart[index].qty += delta;
+
+  if (cart[index].qty <= 0) {
+    cart.splice(index, 1);
+  }
+
+  renderCart();
+}
+
+// checkout WA
 function checkout() {
   if (cart.length === 0) {
-    alert("Silakan pilih menu terlebih dahulu 🍣");
+    alert("Keranjang masih kosong!");
     return;
   }
 
-  let message = "Halo Sushi Tei Pekanbaru, saya ingin memesan:%0A";
+  let pesan = "Halo Sushi Tei Pekanbaru,%0A%0ASaya ingin memesan:%0A";
 
   cart.forEach(item => {
-    message += `- ${item.name} (Rp ${item.price.toLocaleString("id-ID")})%0A`;
+    pesan += `- ${item.nama} (${item.qty}x ${formatRupiah(item.harga)})%0A`;
   });
 
-  message += `%0ATotal: Rp ${total.toLocaleString("id-ID")}`;
+  pesan += `%0ATotal: ${formatRupiah(total)}`;
 
-  window.open(
-    `https://wa.me/628111992539?text=${message}`,
-    "_blank"
-  );
+  const waUrl = `https://wa.me/628111992539?text=${pesan}`;
+  window.open(waUrl, "_blank");
 }
 
-/* FADE ANIMATION */
-window.onload = () => {
-  document.querySelectorAll(".fade").forEach((el, i) => {
-    setTimeout(() => el.classList.add("show"), i * 200);
+// fade animation
+const faders = document.querySelectorAll(".fade");
+const observer = new IntersectionObserver(entries => {
+  entries.forEach(entry => {
+    if (entry.isIntersecting) {
+      entry.target.classList.add("show");
+    }
   });
-};
+});
+
+faders.forEach(el => observer.observe(el));
