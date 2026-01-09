@@ -73,7 +73,7 @@ function checkout() {
 
   pesan += `%0ATotal: ${formatRupiah(total)}`;
 
-  const waUrl = `https://wa.me/628111992539?text=${pesan}`;
+  const waUrl = `https://wa.me/6281283487708?text=${pesan}`;
   window.open(waUrl, "_blank");
 }
 
