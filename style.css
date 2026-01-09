@@ -1,28 +1,149 @@
-body {
+* {
   margin: 0;
-  font-family: Arial, sans-serif;
+  padding: 0;
+  box-sizing: border-box;
+  font-family: "Segoe UI", sans-serif;
 }
 
-.hero {
-  background: #b91c1c;
+body {
+  background: #0f0f0f;
   color: white;
+}
+
+/* HERO */
+.hero {
+  background: linear-gradient(135deg, #b91c1c, #7f1d1d);
   text-align: center;
   padding: 80px 20px;
 }
 
+.hero h1 {
+  font-size: 42px;
+  margin-bottom: 10px;
+}
+
+.hero p {
+  font-size: 18px;
+  margin-bottom: 25px;
+}
+
 .btn {
-  background: black;
-  color: white;
-  padding: 12px 20px;
+  background: white;
+  color: #b91c1c;
+  padding: 14px 28px;
+  border-radius: 30px;
   text-decoration: none;
-  border-radius: 5px;
+  font-weight: bold;
+  transition: 0.3s;
 }
 
-section {
-  padding: 40px 20px;
+.btn:hover {
+  background: #fee2e2;
 }
 
-.menu-list {
+/* MENU */
+.menu {
+  padding: 60px 20px;
+  text-align: center;
+}
+
+.menu h2 {
+  font-size: 28px;
+  margin-bottom: 30px;
+  color: #f87171;
+}
+
+.menu-grid {
+  max-width: 800px;
+  margin: auto;
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
+  gap: 15px;
+}
+
+.card {
+  background: #1c1c1c;
+  padding: 16px;
+  border-radius: 12px;
   display: flex;
-  gap: 20px;
+  justify-content: space-between;
+  transition: 0.3s;
 }
+
+.card:hover {
+  transform: translateY(-4px);
+  background: #7f1d1d;
+}
+
+/* INFO */
+.info {
+  text-align: center;
+  padding: 40px 20px;
+  background: #111;
+}
+
+.info a {
+  color: #f87171;
+  text-decoration: none;
+}
+
+/* FOOTER */
+footer {
+  text-align: center;
+  padding: 15px;
+  font-size: 14px;
+  color: #aaa;
+}
+
+/* === ANIMASI FADE === */
+.fade {
+  opacity: 0;
+  transform: translateY(25px);
+  transition: all 0.8s ease;
+}
+
+.fade.show {
+  opacity: 1;
+  transform: translateY(0);
+}
+
+/* === BUTTON GLOW === */
+.btn {
+  box-shadow: 0 0 0 rgba(255,255,255,0);
+}
+
+.btn:hover {
+  box-shadow: 0 0 25px rgba(255,255,255,0.8);
+}
+
+/* === MENU CARD SMOOTH === */
+.card {
+  transition: transform 0.4s ease, background 0.4s ease;
+}
+
+.card:hover {
+  transform: translateY(-6px) scale(1.02);
+}
+
+.cart {
+  padding: 40px 20px;
+  background: #111;
+  text-align: center;
+}
+
+.cart ul {
+  list-style: none;
+  margin: 20px 0;
+  padding: 0;
+}
+
+.cart li {
+  margin: 8px 0;
+  color: #fca5a5;
+}
+
+.total {
+  font-size: 20px;
+  margin-bottom: 20px;
+}
+

@@ -2,37 +2,87 @@
 <html lang="id">
 <head>
   <meta charset="UTF-8">
-  <title>Sakura Bento</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Sushi Tei Pekanbaru</title>
   <link rel="stylesheet" href="style.css">
 </head>
+
 <body>
 
-<header class="hero">
-  <h1>Sakura Bento</h1>
-  <p>Japanese Street Food Halal & Lezat</p>
-  <a href="#menu" class="btn">Lihat Menu</a>
-</header>
+  <!-- HERO -->
+  <section class="hero fade">
+    <h1>Sushi Tei Pekanbaru</h1>
+    <p>Authentic Japanese Taste 🍣</p>
+    <a 
+      href="https://wa.me/628111992539?text=Halo%20Sushi%20Tei%20Pekanbaru,%20saya%20ingin%20memesan."
+      class="btn">
+      Order via WhatsApp
+    </a>
+  </section>
 
-<section id="menu">
-  <h2>Menu Favorit</h2>
-  <div class="menu-list">
-    <div class="menu-item">
-      <img src="images/ramen.jpg">
-      <h3>Ramen Original</h3>
-      <p>Rp25.000</p>
+  <!-- MENU -->
+  <section class="menu fade">
+    <h2>House Speciality Rolls</h2>
+
+    <div class="menu-grid">
+      <div class="card fade" onclick="addToCart('Salmon Oyako Roll', 141900)">
+        Salmon Oyako Roll <span>Rp 141.900</span>
+      </div>
+
+      <div class="card fade" onclick="addToCart('Jumbo Dragon Roll', 130900)">
+        Jumbo Dragon Roll <span>Rp 130.900</span>
+      </div>
+
+      <div class="card fade" onclick="addToCart('Ultimate Jumbo Dragon Roll', 213400)">
+        Ultimate Jumbo Dragon Roll <span>Rp 213.400</span>
+      </div>
+
+      <div class="card fade" onclick="addToCart('Crunchy Lobster Roll', 74800)">
+        Crunchy Lobster Roll <span>Rp 74.800</span>
+      </div>
+
+      <div class="card fade" onclick="addToCart('Salmon Cheese Roll', 97900)">
+        Salmon Cheese Roll <span>Rp 97.900</span>
+      </div>
+
+      <div class="card fade" onclick="addToCart('Dynamite Roll', 61600)">
+        Dynamite Roll <span>Rp 61.600</span>
+      </div>
+
+      <div class="card fade" onclick="addToCart('Fuji Roll', 57200)">
+        Fuji Roll <span>Rp 57.200</span>
+      </div>
+
+      <div class="card fade" onclick="addToCart('Spicy Maguro Roll', 81400)">
+        Spicy Maguro Roll <span>Rp 81.400</span>
+      </div>
     </div>
-  </div>
-</section>
+  </section>
 
-<section id="about">
-  <h2>Tentang Kami</h2>
-  <p>Sakura Bento menyajikan makanan Jepang dengan cita rasa lokal.</p>
-</section>
+  <!-- CART -->
+  <section class="cart fade">
+    <h2>🛒 Pesanan Anda</h2>
+    <ul id="cart-list"></ul>
+    <p class="total">Total: <span id="total">Rp 0</span></p>
 
-<section id="order">
-  <h2>Pesan Sekarang</h2>
-  <a href="https://wa.me/628123456789" class="btn">Order via WhatsApp</a>
-</section>
+    <button class="btn" onclick="checkout()">
+      Pesan Sekarang via WhatsApp
+    </button>
+  </section>
 
+  <!-- INFO -->
+  <section class="info fade">
+    <p>🕗 Jam Buka: 08:00 - 22:00</p>
+    <a href="https://maps.app.goo.gl/dHoP5yAZGrfnzGkT6" target="_blank">
+      📍 Lihat Lokasi di Google Maps
+    </a>
+  </section>
+
+  <!-- FOOTER -->
+  <footer class="fade">
+    <p>© 2026 Sushi Tei Pekanbaru</p>
+  </footer>
+
+  <script src="script.js"></script>
 </body>
 </html>
