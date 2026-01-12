@@ -14,7 +14,7 @@
     <h1>Sushi Tei Pekanbaru</h1>
     <p>Authentic Japanese Taste 🍣</p>
     <a 
-      href="https://wa.me/6281283487708?text=Halo%20Sushi%20Tei%20Pekanbaru,%20saya%20ingin%20memesan."
+      href="https://wa.me/628111992539"
       class="btn">
       Order via WhatsApp
     </a>
@@ -25,42 +25,38 @@
     <h2>House Speciality Rolls</h2>
 
     <div class="menu-grid">
-      <div class="card fade" onclick="addToCart('Salmon Oyako Roll', 141900)">
+      <div class="card" onclick="addToCart('Aburi Salmon Roll', 127600)">
+        Aburi Salmon Roll <span>Rp 127.600</span>
+      </div>
+      <div class="card" onclick="addToCart('Salmon Oyako Roll', 141900)">
         Salmon Oyako Roll <span>Rp 141.900</span>
       </div>
-
-      <div class="card fade" onclick="addToCart('Jumbo Dragon Roll', 130900)">
+      <div class="card" onclick="addToCart('Jumbo Dragon Roll', 130900)">
         Jumbo Dragon Roll <span>Rp 130.900</span>
       </div>
-
-      <div class="card fade" onclick="addToCart('Ultimate Jumbo Dragon Roll', 213400)">
+      <div class="card" onclick="addToCart('Ultimate Jumbo Dragon Roll', 213400)">
         Ultimate Jumbo Dragon Roll <span>Rp 213.400</span>
       </div>
-
-      <div class="card fade" onclick="addToCart('Crunchy Lobster Roll', 74800)">
+      <div class="card" onclick="addToCart('Crunchy Lobster Roll', 74800)">
         Crunchy Lobster Roll <span>Rp 74.800</span>
       </div>
-
-      <div class="card fade" onclick="addToCart('Salmon Cheese Roll', 97900)">
+      <div class="card" onclick="addToCart('Salmon Cheese Roll', 97900)">
         Salmon Cheese Roll <span>Rp 97.900</span>
       </div>
-
-      <div class="card fade" onclick="addToCart('Dynamite Roll', 61600)">
+      <div class="card" onclick="addToCart('Dynamite Roll', 61600)">
         Dynamite Roll <span>Rp 61.600</span>
       </div>
-
-      <div class="card fade" onclick="addToCart('Fuji Roll', 57200)">
+      <div class="card" onclick="addToCart('Fuji Roll', 57200)">
         Fuji Roll <span>Rp 57.200</span>
       </div>
-
-      <div class="card fade" onclick="addToCart('Spicy Maguro Roll', 81400)">
+      <div class="card" onclick="addToCart('Spicy Maguro Roll', 81400)">
         Spicy Maguro Roll <span>Rp 81.400</span>
       </div>
     </div>
   </section>
 
-  <!-- CART -->
-  <section class="cart fade">
+  <!-- CART (SATU SAJA) -->
+  <section class="cart sticky-cart fade">
     <h2>🛒 Pesanan Anda</h2>
     <ul id="cart-list"></ul>
     <p class="total">Total: <span id="total">Rp 0</span></p>
@@ -84,5 +80,13 @@
   </footer>
 
   <script src="script.js"></script>
+  
+  <!-- FLOATING MINI CART -->
+<div class="floating-cart" id="floating-cart">
+  <span id="floating-count">0 item</span>
+  <strong id="floating-total">Rp 0</strong>
+  <button onclick="checkout()">Checkout</button>
+</div>
+
 </body>
 </html>

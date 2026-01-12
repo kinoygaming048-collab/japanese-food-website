@@ -1,55 +1,75 @@
-let cart = [];
-let total = 0;
+let cart = JSON.parse(localStorage.getItem("cart")) || [];
 
-// format rupiah
-function formatRupiah(angka) {
-  return "Rp " + angka.toLocaleString("id-ID");
+let cartList;
+let totalEl;
+
+/* RENDER CART */
+function renderCart() {
+  cartList.innerHTML = "";
+  let total = 0;
+  let totalQty = 0;
+
+  cart.forEach((item, index) => {
+    total += item.price * item.qty;
+    totalQty += item.qty;
+
+    const li = document.createElement("li");
+    li.innerHTML = `
+      <div class="cart-item">
+        <span>${item.name}</span>
+
+        <div class="qty-control">
+          <button onclick="changeQty(${index}, -1)">−</button>
+          <span>${item.qty}</span>
+          <button onclick="changeQty(${index}, 1)">+</button>
+        </div>
+
+        <strong>Rp ${(item.price * item.qty).toLocaleString("id-ID")}</strong>
+
+        <button class="remove-btn" onclick="removeItem(${index})">❌</button>
+      </div>
+    `;
+
+    cartList.appendChild(li);
+  });
+
+  // CART UTAMA
+  document.getElementById("total").innerText =
+    "Rp " + total.toLocaleString("id-ID");
+
+  // FLOATING CART
+  document.getElementById("floating-total").innerText =
+    "Rp " + total.toLocaleString("id-ID");
+
+  document.getElementById("floating-count").innerText =
+    totalQty + " item";
+
+  // SIMPAN
+  localStorage.setItem("cart", JSON.stringify(cart));
 }
 
-// tambah ke cart
-function addToCart(nama, harga) {
-  const item = cart.find(i => i.nama === nama);
+/* ADD TO CART */
+function addToCart(name, price) {
+  const existing = cart.find(item => item.name === name);
 
-  if (item) {
-    item.qty++;
+  if (existing) {
+    existing.qty += 1;
   } else {
-    cart.push({ nama, harga, qty: 1 });
+    cart.push({ name, price, qty: 1 });
   }
 
   renderCart();
 }
 
-// render cart
-function renderCart() {
-  const cartList = document.getElementById("cart-list");
-  const totalEl = document.getElementById("total");
-
-  cartList.innerHTML = "";
-  total = 0;
-
-  cart.forEach((item, index) => {
-    const subTotal = item.harga * item.qty;
-    total += subTotal;
-
-    const li = document.createElement("li");
-    li.innerHTML = `
-      <strong>${item.nama}</strong><br>
-      ${formatRupiah(item.harga)} × ${item.qty} = ${formatRupiah(subTotal)}
-      <div class="qty">
-        <button onclick="changeQty(${index}, -1)">−</button>
-        <span>${item.qty}</span>
-        <button onclick="changeQty(${index}, 1)">+</button>
-      </div>
-    `;
-    cartList.appendChild(li);
-  });
-
-  totalEl.textContent = formatRupiah(total);
+/* REMOVE ITEM */
+function removeItem(index) {
+  cart.splice(index, 1);
+  renderCart();
 }
 
-// ubah qty
-function changeQty(index, delta) {
-  cart[index].qty += delta;
+/* CHANGE QTY */
+function changeQty(index, change) {
+  cart[index].qty += change;
 
   if (cart[index].qty <= 0) {
     cart.splice(index, 1);
@@ -58,33 +78,37 @@ function changeQty(index, delta) {
   renderCart();
 }
 
-// checkout WA
+/* CHECKOUT */
 function checkout() {
   if (cart.length === 0) {
     alert("Keranjang masih kosong!");
     return;
   }
 
-  let pesan = "Halo Sushi Tei Pekanbaru,%0A%0ASaya ingin memesan:%0A";
+  let total = 0;
+  let message = "Halo Sushi Tei Pekanbaru,%0ASaya ingin memesan:%0A";
 
   cart.forEach(item => {
-    pesan += `- ${item.nama} (${item.qty}x ${formatRupiah(item.harga)})%0A`;
+    total += item.price * item.qty;
+    message += `- ${item.name} x${item.qty} (Rp ${(item.price * item.qty).toLocaleString("id-ID")})%0A`;
   });
 
-  pesan += `%0ATotal: ${formatRupiah(total)}`;
+  message += `%0ATotal: Rp ${total.toLocaleString("id-ID")}`;
 
-  const waUrl = `https://wa.me/6281283487708?text=${pesan}`;
-  window.open(waUrl, "_blank");
+  window.open(
+    `https://wa.me/628111992539?text=${message}`,
+    "_blank"
+  );
 }
 
-// fade animation
-const faders = document.querySelectorAll(".fade");
-const observer = new IntersectionObserver(entries => {
-  entries.forEach(entry => {
-    if (entry.isIntersecting) {
-      entry.target.classList.add("show");
-    }
-  });
-});
+/* LOAD */
+window.onload = function () {
+  cartList = document.getElementById("cart-list");
+  totalEl = document.getElementById("total");
 
-faders.forEach(el => observer.observe(el));
+  renderCart();
+
+  document.querySelectorAll(".fade").forEach((el, i) => {
+    setTimeout(() => el.classList.add("show"), i * 120);
+  });
+};
